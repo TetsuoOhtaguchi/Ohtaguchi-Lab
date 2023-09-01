@@ -1,63 +1,21 @@
-# Nuxt 3 Minimal Starter
+# Ohtaguchi Lab
 
-Look at the [Nuxt 3 documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## deploy の手順
 
-## Setup
-
-Make sure to install the dependencies:
-
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
+1. build コマンドを実行する
+2. .output/server/chunks/nitro/firebase-gen-default.mjs のコードの書き換えを行う
+3. deploy コマンドを実行する
 
 ```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm run dev
-
-# yarn
-yarn dev
-```
-
-## Production
-
-Build the application for production:
-
-```bash
-# npm
-npm run build
-
-# pnpm
-pnpm run build
-
-# yarn
+# buildコマンドを実行する
 yarn build
+
+# .output/server/chunks/nitro/firebase-gen-default.mjsのコードの書き換えを行う
+# こちらを
+const server = functions.region(firebaseConfig.region ?? functions.RESET_VALUE).runWith(firebaseConfig.runtimeOptions ?? functions.RESET_VALUE).https.onRequest(toNodeListener(nitroApp.h3App));
+# 以下に変更
+const server = functions.region('asia-northeast1').https.onRequest(toNodeListener(nitroApp.h3App));
+
+# deployコマンドを実行する
+firebase deploy
 ```
-
-Locally preview production build:
-
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm run preview
-
-# yarn
-yarn preview
-```
-
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.

@@ -4,7 +4,7 @@ export default defineNuxtConfig({
     head: {
       title: 'Ohtaguchi Lab',
       htmlAttrs: {
-        lang: 'en'
+        lang: 'ja'
       },
       meta: [{ charset: 'utf-8' }],
       link: [
@@ -19,7 +19,8 @@ export default defineNuxtConfig({
     preset: 'firebase'
   },
   typescript: {
-    strict: true
+    strict: true,
+    typeCheck: true
   },
   srcDir: 'src/',
   css: ['@/assets/css/reset.css', '@/assets/css/variable.css'],
@@ -31,7 +32,12 @@ export default defineNuxtConfig({
       FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID,
       FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
       FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
-      FIREBASE_APP_ID: process.env.FIREBASE_APP_ID
+      FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
+
+      NUXT_NEWT_SPACE_UID: process.env.NUXT_NEWT_SPACE_UID,
+      NUXT_NEWT_CDN_API_TOKEN: process.env.NUXT_NEWT_CDN_API_TOKEN,
+      NUXT_NEWT_APP_UID: process.env.NUXT_NEWT_APP_UID,
+      NUXT_NEWT_BLOG_MODEL_UID: process.env.NUXT_NEWT_BLOG_MODEL_UID
     }
   }
 })

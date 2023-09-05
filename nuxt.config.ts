@@ -24,6 +24,15 @@ export default defineNuxtConfig({
   },
   srcDir: 'src/',
   css: ['@/assets/css/reset.css', '@/assets/css/variable.css'],
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          additionalData: '@import "@/assets/scss/blogBody.scss";'
+        }
+      }
+    }
+  },
   components: ['~/components'],
   runtimeConfig: {
     public: {

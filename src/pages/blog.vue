@@ -39,29 +39,31 @@ const handlerArticleOpen = async (id: string) => {
         class="card"
         @click="handlerArticleOpen(item.id)"
       >
-        <span>id: {{ item.id }}</span>
-        <span>topicTitle: {{ item.topicTitle }}</span>
-        <span>publishedAt: {{ item.publishedAt }}</span>
-        <span>body: {{ item.body }}</span>
+        <span>{{ item.topicTitle }}</span>
+        <span>{{ item.publishedAt }}</span>
+        <div v-html="$sanitize(item.body)" class="blog__body" />
       </div>
     </div>
   </div>
 </template>
 
-<style lang="sass" scoped>
-.card__container
-    display: flex
-    flex-direction: column
-    gap: 16px
-    align-items: center
+<style lang="scss">
+.card__container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  align-items: center;
+}
 
-.card
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px
-    display: flex
-    flex-direction: column
-    gap: 24px
-    cursor: pointer
-    // transition: 0.3s
-.card:hover
-    opacity: 0.7
+.card {
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  cursor: pointer;
+}
+
+.card:hover {
+  opacity: 0.7;
+}
 </style>

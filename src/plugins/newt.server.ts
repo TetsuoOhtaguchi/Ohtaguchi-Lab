@@ -1,5 +1,4 @@
 import { createClient } from 'newt-client-js'
-import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
 
 export default defineNuxtPlugin(() => {
   const runtimeConfig = useRuntimeConfig()

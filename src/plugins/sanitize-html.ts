@@ -3,7 +3,7 @@ import sanitizeHTML from 'sanitize-html'
 export default defineNuxtPlugin(() => {
   const sanitize = (html: string) =>
     sanitizeHTML(html, {
-      allowedTags: ['h2', 'h3', 'p', 'img'],
+      allowedTags: ['h2', 'h3', 'p', 'img', 'pre'],
       allowedAttributes: {
         a: ['href', 'name', 'target'],
         img: ['src', 'alt']

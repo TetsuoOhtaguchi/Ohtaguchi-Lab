@@ -15,6 +15,7 @@ const { data } = await useAsyncData(async () => {
       id: item._id,
       topicTitle: item.topicTitle,
       publishedAt: item.publishedAt,
+      updatedAt: item.updatedAt,
       body: item.body,
       slug: item.slug
     }
@@ -23,7 +24,7 @@ const { data } = await useAsyncData(async () => {
 
 const handlerArticleOpen = async (id: string) => {
   const target = data.value?.find(article => article.id === id)
-  console.log(target, 'get article!')
+  console.log(target?.body, 'get article!')
 }
 </script>
 
@@ -40,7 +41,8 @@ const handlerArticleOpen = async (id: string) => {
         @click="handlerArticleOpen(item.id)"
       >
         <span>{{ item.topicTitle }}</span>
-        <span>{{ item.publishedAt }}</span>
+        <span>{{ formatDate(item.publishedAt) }}</span>
+        <span>{{ formatDate(item.updatedAt) }}</span>
         <div v-html="$sanitize(item.body)" class="blog__body" />
       </div>
     </div>
@@ -59,7 +61,7 @@ const handlerArticleOpen = async (id: string) => {
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
   display: flex;
   flex-direction: column;
-  gap: 24px;
+  // gap: 24px;
   cursor: pointer;
 }
 

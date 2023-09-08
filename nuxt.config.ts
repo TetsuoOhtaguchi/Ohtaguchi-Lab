@@ -28,7 +28,7 @@ export default defineNuxtConfig({
     css: {
       preprocessorOptions: {
         scss: {
-          additionalData: '@import "@/assets/scss/blogBody.scss";'
+          additionalData: '@import "@/assets/scss/sanitizeBlog.scss";'
         }
       }
     }

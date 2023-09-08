@@ -37,48 +37,53 @@ const handlerArticleOpen = async (id: string) => {
 
     <div class="articleCard__container">
       <div v-for="item in data" :key="item.id">
-        <article class="articleCard" @click="handlerArticleOpen(item.id)">
-          <NuxtLink
-            class="articleCard__topicContainer"
-            :to="{ path: '/article', query: { id: item.id } }"
+        <NuxtLink
+          :to="{ path: '/article', query: { id: item.id } }"
+          class="nuxtLink"
+        >
+          <article
+            class="articleCard boxShadow"
+            @click="handlerArticleOpen(item.id)"
           >
-            <h2 class="articleCard__topicTitle__sp">{{ item.topicTitle }}</h2>
+            <div class="articleCard__topicContainer">
+              <h2 class="articleCard__topicTitle__sp">{{ item.topicTitle }}</h2>
 
-            <img :src="item.thumbnail.src" class="articleCard__image" />
+              <img :src="item.thumbnail.src" class="articleCard__image" />
 
-            <div>
-              <h2 class="articleCard__topicTitle__pc">{{ item.topicTitle }}</h2>
+              <div>
+                <h2 class="articleCard__topicTitle__pc">
+                  {{ item.topicTitle }}
+                </h2>
 
-              <div class="articleCard__timeContainer">
-                <time class="articleCard__time">
-                  <i
-                    class="material-icons-outlined articleCard__time__materialIcon"
-                  >
-                    edit
-                  </i>
-                  {{ formatDate(item.publishedAt) }}
-                </time>
-                <time class="articleCard__time">
-                  <i
-                    class="material-icons-outlined articleCard__time__materialIcon"
-                  >
-                    update
-                  </i>
-                  {{ formatDate(item.updatedAt) }}
-                </time>
+                <div class="articleCard__timeContainer">
+                  <time :datetime="item.publishedAt" class="articleCard__time">
+                    <i
+                      class="material-icons-outlined articleCard__time__materialIcon"
+                    >
+                      edit
+                    </i>
+                    {{ formatDate(item.publishedAt) }}
+                  </time>
+                  <time :datetime="item.updatedAt" class="articleCard__time">
+                    <i
+                      class="material-icons-outlined articleCard__time__materialIcon"
+                    >
+                      update
+                    </i>
+                    {{ formatDate(item.updatedAt) }}
+                  </time>
+                </div>
+                <p class="articleCard__postExcerpt">{{ item.postExcerpt }}</p>
               </div>
-              <p class="articleCard__postExcerpt">{{ item.postExcerpt }}</p>
             </div>
-          </NuxtLink>
-
-          <!-- <div v-html="$sanitize(item.body)" class="articleCard__body" /> -->
-        </article>
+          </article>
+        </NuxtLink>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .articleCard__container {
   display: flex;
   flex-direction: column;
@@ -88,8 +93,6 @@ const handlerArticleOpen = async (id: string) => {
 }
 
 .articleCard {
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
-    rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
   display: flex;
   flex-direction: column;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -103,7 +106,6 @@ const handlerArticleOpen = async (id: string) => {
 .articleCard__topicContainer {
   display: flex;
   gap: 16px;
-  text-decoration: none;
   @media screen and (max-width: 700px) {
     flex-direction: column;
   }

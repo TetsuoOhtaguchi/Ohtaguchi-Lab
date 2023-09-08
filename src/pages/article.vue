@@ -13,6 +13,7 @@ const { data } = await useAsyncData(async () => {
     modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
     contentId: route.query.id as string
   })
+  console.log(res)
 
   return res
 })
@@ -23,10 +24,12 @@ const { data } = await useAsyncData(async () => {
     <h1>{{ data?.topicTitle }}</h1>
 
     <div>
-      <time :datetime="data?.publishedAt">
-        {{ formatDate(data?.publishedAt) }}
+      <time :datetime="data?._sys.raw.firstPublishedAt">
+        {{ formatDate(data?._sys.raw.firstPublishedAt) }}
       </time>
-      <time :datetime="data?.updatedAt">{{ formatDate(data?.updatedAt) }}</time>
+      <time :datetime="data?._sys.raw.updatedAt">
+        {{ formatDate(data?._sys.raw.updatedAt) }}
+      </time>
     </div>
 
     <!-- <img :src="data?.thumbnail.src" /> -->

@@ -1,6 +1,7 @@
 <template>
   <div>
     <h1>Ohtaguchi Lab</h1>
-    <span>index.vue</span>
+
+    <NuxtLink :to="{ path: '/blog' }" class="nuxtLink">blogページ</NuxtLink>
   </div>
 </template>

@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { PropType } from 'vue'
 import { Article } from '@/types/NewtType'
 
 defineProps({
@@ -53,7 +52,7 @@ defineProps({
       <div class="articleCard__topicContainer">
         <h2 class="articleCard__topicTitle__sp">{{ article.topicTitle }}</h2>
 
-        <img :src="article.thumbnail.src" class="articleCard__image" />
+        <img :src="article.thumbnail.src" class="articleCard__thumbnail" />
 
         <div>
           <h2 class="articleCard__topicTitle__pc">
@@ -81,7 +80,10 @@ defineProps({
               {{ formatDate(article._sys.updatedAt) }}
             </time>
           </div>
-          <p class="articleCard__postExcerpt">{{ article.postExcerpt }}</p>
+          <div
+            v-html="$sanitize(article.postExcerpt)"
+            class="articleCard__postExcerpt"
+          />
         </div>
       </div>
     </article>
@@ -96,8 +98,11 @@ defineProps({
   cursor: pointer;
   transition: 0.3s;
   padding: 16px;
+  max-width: 838px;
   width: 100%;
-  max-width: 870px;
+  @media screen and (max-width: 902px) {
+    width: calc(100vw - 64px);
+  }
 }
 
 .articleCard__topicContainer {
@@ -105,18 +110,19 @@ defineProps({
   gap: 16px;
   @media screen and (max-width: 700px) {
     flex-direction: column;
+    gap: 32px;
   }
 }
 
 .articleCard__topicTitle__pc {
-  width: 528px;
+  width: 496px;
   font-size: 24px;
   font-weight: 600;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   color: var(--text-main);
-  @media screen and (max-width: 935px) {
+  @media screen and (max-width: 902px) {
     width: calc(100vw - 406px);
   }
   @media screen and (max-width: 700px) {
@@ -129,18 +135,18 @@ defineProps({
   @media screen and (max-width: 700px) {
     display: block;
     width: calc(100vw - 64px);
-    font-size: 16px;
+    font-size: 20px;
     font-weight: 600;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    overflow-wrap: break-word;
+    line-height: 1.3;
+    color: var(--text-main);
   }
 }
 
 .articleCard__timeContainer {
   display: flex;
-  gap: 24px;
-  margin: 16px 0 20px;
+  gap: 32px;
+  margin: 16px 0 32px;
   @media screen and (max-width: 700px) {
     margin: 0 0 16px 0;
   }
@@ -165,7 +171,7 @@ defineProps({
     rgba(0, 0, 0, 0.22) 0px 10px 10px;
 }
 
-.articleCard__image {
+.articleCard__thumbnail {
   width: calc(100vw - 64px);
   max-width: 326px;
   height: calc(calc(100vw - 64px) / 1.618);
@@ -175,13 +181,6 @@ defineProps({
   @media screen and (max-width: 700px) {
     max-width: 100%;
     max-height: 393px;
-  }
-}
-
-.articleCard__postExcerpt {
-  color: var(--text-black);
-  @media screen and (max-width: 700px) {
-    font-size: 14px;
   }
 }
 </style>

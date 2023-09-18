@@ -22,11 +22,6 @@ const { data } = await useAsyncData(async () => {
     }
   })
 })
-
-// const handlerArticleOpen = async (id: string) => {
-//   const target = data.value?.find(article => article.id === id)
-//   console.log(target, 'get article!')
-// }
 </script>
 
 <template>
@@ -45,6 +40,6 @@ const { data } = await useAsyncData(async () => {
   flex-direction: column;
   gap: 64px;
   align-items: center;
-  padding: 0px 32px;
+  padding: 0px 16px;
 }
 </style>

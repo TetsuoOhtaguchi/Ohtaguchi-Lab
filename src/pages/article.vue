@@ -13,37 +13,24 @@ const { data } = await useAsyncData(async () => {
     modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
     contentId: route.query.id as string
   })
-  console.log(res)
 
   return res
 })
 </script>
 
 <template>
-  <article class="articleContents boxShadow">
-    <h1>{{ data?.topicTitle }}</h1>
-
-    <div>
-      <time :datetime="data?._sys.raw.firstPublishedAt">
-        {{ formatDate(data?._sys.raw.firstPublishedAt) }}
-      </time>
-      <time :datetime="data?._sys.raw.updatedAt">
-        {{ formatDate(data?._sys.raw.updatedAt) }}
-      </time>
-    </div>
-
-    <!-- <img :src="data?.thumbnail.src" /> -->
-
-    <p>{{ data?.postExcerpt }}</p>
-
-    <!-- todo ここにbodyの目次が欲しい -->
-
-    <div v-html="$sanitize(data?.body)" class="article__body" />
-  </article>
+  <div class="articleVue">
+    <ArticleContents v-if="data" :article="data" />
+    <div v-else>読み込み中です...</div>
+  </div>
 </template>
 
-<style lang="scss">
-.articleContents {
-  width: 870px;
+<style lang="scss" scoped>
+.articleVue {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 100px;
+  padding: 0 16px;
 }
 </style>

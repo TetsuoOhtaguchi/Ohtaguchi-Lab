@@ -23,7 +23,11 @@ export default defineNuxtConfig({
     typeCheck: true
   },
   srcDir: 'src/',
-  css: ['@/assets/css/reset.css', '@/assets/css/variable.css'],
+  css: [
+    '@/assets/css/reset.css',
+    '@/assets/css/variable.css',
+    '@/assets/css/keyframes.css'
+  ],
   vite: {
     css: {
       preprocessorOptions: {

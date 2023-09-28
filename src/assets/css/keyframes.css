@@ -5,13 +5,13 @@
   }
 }
 
-@keyframes firstViewMaskFadeoutAnimation {
+@keyframes hideAnimation {
   100% {
     opacity: 0;
   }
 }
 
-@keyframes showLogoAnimation {
+@keyframes showAnimation {
   100% {
     opacity: 1;
   }

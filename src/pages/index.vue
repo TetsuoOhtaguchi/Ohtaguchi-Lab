@@ -2,6 +2,7 @@
 const firstPlayback = ref(false)
 const color = ref<'black' | 'white'>('black')
 const colorChangeState = ref(false)
+const headerShowFlug = ref(false)
 
 const playAudio = () => {
   if (firstPlayback.value) return
@@ -11,15 +12,30 @@ const playAudio = () => {
   if (color.value === 'black') {
     setTimeout(() => {
       color.value = 'white'
+      headerShowFlug.value = true
     }, 2600)
     setTimeout(() => {
       colorChangeState.value = true
     }, 4900)
   }
 }
+
+const aboutClickHandler = () => {
+  console.log('aboutClickHandler')
+}
+
+const contactClickHandler = () => {
+  console.log('contactClickHandler')
+}
 </script>
 
 <template>
+  <Header
+    :showFlug="headerShowFlug"
+    @clickAbout="aboutClickHandler"
+    @clickContact="contactClickHandler"
+  />
+
   <div class="indexPage">
     <div
       class="firstViewMask"
@@ -91,7 +107,7 @@ const playAudio = () => {
 
 .firstViewMask__fadeoutAnimation__style {
   background-color: var(--bg-black);
-  animation: firstViewMaskFadeoutAnimation 11s forwards;
+  animation: hideAnimation 11s forwards;
 }
 
 .logo__wrapper {
@@ -104,7 +120,7 @@ const playAudio = () => {
 }
 
 .logo__showLogoAnimation__style {
-  animation: showLogoAnimation 1.3s forwards;
+  animation: showAnimation 1.3s forwards;
   animation-delay: 1.3s;
 }
 

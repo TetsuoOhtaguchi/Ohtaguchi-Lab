@@ -48,7 +48,7 @@ const emit = defineEmits<{
 <style lang="scss" scoped>
 .header {
   position: fixed;
-  z-index: 100;
+  z-index: 4;
   width: 100%;
 }
 

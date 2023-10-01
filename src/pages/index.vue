@@ -3,6 +3,8 @@ const firstPlayback = ref(false)
 const color = ref<'black' | 'white'>('black')
 const colorChangeState = ref(false)
 const headerShowFlug = ref(false)
+const modalShowState = ref(false)
+const modalContentsItem = ref<'about' | 'contact' | ''>('')
 
 const playAudio = () => {
   if (firstPlayback.value) return
@@ -21,11 +23,17 @@ const playAudio = () => {
 }
 
 const aboutClickHandler = () => {
-  console.log('aboutClickHandler')
+  modalShowState.value = true
+  modalContentsItem.value = 'about'
 }
 
 const contactClickHandler = () => {
-  console.log('contactClickHandler')
+  modalShowState.value = true
+  modalContentsItem.value = 'contact'
+}
+
+const modalCloseHandler = (val: boolean) => {
+  modalShowState.value = val
 }
 </script>
 
@@ -82,6 +90,23 @@ const contactClickHandler = () => {
     </transition>
 
     <FirstViewVideo />
+
+    <transition name="modalFadeoutMask">
+      <div v-show="modalShowState" class="modalFadeoutMask" />
+    </transition>
+
+    <Modal
+      class="modal"
+      v-model="modalShowState"
+      @clickClose="modalCloseHandler"
+    >
+      <div v-show="modalContentsItem === 'about'">
+        <ModalAbout />
+      </div>
+      <div v-show="modalContentsItem === 'contact'">
+        <ModalContact />
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -166,5 +191,33 @@ const contactClickHandler = () => {
 
 .audioPlayer__moveBottomAnimation__style {
   animation: upAndDownAnimation none, moveBottomAnimation 1.3s forwards;
+}
+
+.modalFadeoutMask {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  background-color: var(--bg-black);
+  z-index: 3;
+  animation: modalAddHeightAnimation 1s forwards;
+  animation-delay: 1s;
+  transition: 0.3s;
+}
+
+.modalFadeoutMask-enter-avtive,
+.modalFadeoutMask-leave-active {
+  opacity: 1;
+}
+
+.modalFadeoutMask-enter-from,
+.modalFadeoutMask-leave-to {
+  opacity: 0;
+}
+
+.modal {
+  position: absolute;
+  top: 0;
+  width: 100vw;
+  z-index: 5;
 }
 </style>

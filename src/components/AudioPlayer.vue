@@ -2,12 +2,17 @@
 import { ref } from 'vue'
 import { Howl } from 'howler'
 
-defineProps({
+const props = defineProps({
   /**
    * カラー
    * @example 'white' | 'black'
    */
-  color: { type: String as PropType<'white' | 'black'>, required: true }
+  color: { type: String as PropType<'white' | 'black'>, required: true },
+  /**
+   * モーダル表示状態
+   * @example true | false
+   */
+  modalShowState: { type: Boolean, required: true }
 })
 
 const emit = defineEmits<{
@@ -35,7 +40,7 @@ const playAudio = () => {
   // howler.jsで曲を生成する
   sound.value = new Howl({
     src: [audioSrc.value],
-    volume: 0.5,
+    volume: 0.4,
     loop: true,
     autoplay: false
   })
@@ -59,6 +64,20 @@ const stopAudio = () => {
     playingFlug.value = false
   }
 }
+
+watch(
+  () => props.modalShowState,
+  () => {
+    // モーダルが開いた場合、音量を下げる
+    if (props.modalShowState) {
+      sound.value?.volume(0.2)
+    }
+    // モーダルが閉じた場合、音量を上げる
+    if (!props.modalShowState) {
+      sound.value?.volume(0.4)
+    }
+  }
+)
 </script>
 
 <template>

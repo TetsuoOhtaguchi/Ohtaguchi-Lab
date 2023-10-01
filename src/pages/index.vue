@@ -67,7 +67,11 @@ const modalCloseHandler = (val: boolean) => {
           audioPlayer__moveBottomAnimation__style: firstPlayback
         }"
       />
-      <AudioPlayer :color="color" @playAudio="playAudio" />
+      <AudioPlayer
+        :color="color"
+        :modalShowState="modalShowState"
+        @playAudio="playAudio"
+      />
     </div>
 
     <transition name="firstPlaybackTransition">

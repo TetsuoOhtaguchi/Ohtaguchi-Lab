@@ -1,6 +1,10 @@
 <script setup lang="ts">
 import { Article } from '@/types/NewtType'
 
+definePageMeta({
+  layout: 'blog-layout'
+})
+
 const { data } = await useAsyncData(async () => {
   const runtimeConfig = useRuntimeConfig()
   const { $newtClient } = useNuxtApp()
@@ -25,12 +29,8 @@ const { data } = await useAsyncData(async () => {
 </script>
 
 <template>
-  <div>
-    <h1>Blog</h1>
-
-    <div class="articleCard__container">
-      <ArticleCard v-for="item in data" :key="item._id" :article="item" />
-    </div>
+  <div class="articleCard__container">
+    <ArticleCard v-for="item in data" :key="item._id" :article="item" />
   </div>
 </template>
 
@@ -40,6 +40,6 @@ const { data } = await useAsyncData(async () => {
   flex-direction: column;
   gap: 64px;
   align-items: center;
-  padding: 0px 16px;
+  padding: 96px 16px;
 }
 </style>

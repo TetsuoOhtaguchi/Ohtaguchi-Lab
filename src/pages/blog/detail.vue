@@ -2,6 +2,10 @@
 import { useRoute } from 'vue-router'
 import { Article } from '@/types/NewtType'
 
+definePageMeta({
+  layout: 'blog-layout'
+})
+
 const route = useRoute()
 
 const { data } = await useAsyncData(async () => {
@@ -30,7 +34,6 @@ const { data } = await useAsyncData(async () => {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 100px;
-  padding: 0 16px;
+  padding: 100px 16px;
 }
 </style>

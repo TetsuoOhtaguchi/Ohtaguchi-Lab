@@ -4,7 +4,12 @@ defineProps({
    * 表示フラグ
    * @example 'true' | 'false'
    */
-  showFlug: { type: Boolean, required: true }
+  showFlug: { type: Boolean, required: true },
+  /**
+   * デザイン変更
+   * @example 'index' | 'blog'
+   */
+  designChange: { type: String as PropType<'index' | 'blog'>, default: 'index' }
 })
 
 const emit = defineEmits<{
@@ -14,8 +19,12 @@ const emit = defineEmits<{
 </script>
 
 <template>
-  <header v-show="showFlug" class="header">
-    <nav>
+  <header
+    v-show="showFlug"
+    class="header"
+    :class="{ flexBox__justify__content: designChange === 'index' }"
+  >
+    <nav v-show="designChange === 'index'">
       <ul class="header__unorderedList">
         <li class="header__listItem" :class="{ showAbout: showFlug }">
           <button
@@ -42,6 +51,14 @@ const emit = defineEmits<{
         </li>
       </ul>
     </nav>
+
+    <NuxtLink
+      v-show="designChange === 'blog'"
+      class="nuxtLink header__logo__wrapper"
+      to="/"
+    >
+      <Logo size="small" color="white" />
+    </NuxtLink>
   </header>
 </template>
 
@@ -49,16 +66,20 @@ const emit = defineEmits<{
 .header {
   position: fixed;
   z-index: 4;
-  width: 100%;
+  width: calc(100vw - 32px);
+  padding: 0 16px;
+  height: 55px;
+  display: flex;
+  align-items: center;
+}
+
+.flexBox__justify__content {
+  justify-content: flex-end;
 }
 
 .header__unorderedList {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  height: 55px;
   gap: 16px;
-  padding: 0 16px;
 }
 
 .header__listItem {
@@ -87,5 +108,10 @@ const emit = defineEmits<{
 .showContact {
   animation: showAnimation 0.3s forwards;
   animation-delay: 1.9s;
+}
+
+.header__logo__wrapper {
+  height: auto;
+  width: 200px;
 }
 </style>

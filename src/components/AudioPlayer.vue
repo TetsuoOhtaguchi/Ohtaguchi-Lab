@@ -70,7 +70,9 @@ watch(
   () => {
     // モーダルが開いた場合、音量を下げる
     if (props.modalShowState) {
-      sound.value?.volume(0.2)
+      setTimeout(() => {
+        sound.value?.volume(0.2)
+      }, 3000)
     }
     // モーダルが閉じた場合、音量を上げる
     if (!props.modalShowState) {

@@ -42,7 +42,7 @@ const props = defineProps({
   }
 })
 
-console.log(props.article?.body)
+// console.log(props.article?.body)
 </script>
 
 <template>

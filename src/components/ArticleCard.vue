@@ -45,10 +45,13 @@ defineProps({
 
 <template>
   <NuxtLink
-    :to="{ path: '/article', query: { id: article._id, slug: article.slug } }"
+    :to="{
+      path: '/blog/detail',
+      query: { id: article._id, slug: article.slug }
+    }"
     class="nuxtLink"
   >
-    <article class="articleCard boxShadow">
+    <article class="articleCard">
       <div class="articleCard__topicContainer">
         <h2 class="articleCard__topicTitle__sp">{{ article.topicTitle }}</h2>
 
@@ -92,6 +95,8 @@ defineProps({
 
 <style lang="scss" scoped>
 .articleCard {
+  background-color: var(--bg-cardBlack);
+  color: var(--text-articleWhite);
   display: flex;
   flex-direction: column;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -121,7 +126,6 @@ defineProps({
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  color: var(--text-main);
   @media screen and (max-width: 902px) {
     width: calc(100vw - 406px);
   }
@@ -139,7 +143,6 @@ defineProps({
     font-weight: 600;
     overflow-wrap: break-word;
     line-height: 1.3;
-    color: var(--text-main);
   }
 }
 
@@ -154,7 +157,6 @@ defineProps({
 
 .articleCard__time {
   font-size: 12px;
-  color: var(--text-black);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -163,12 +165,10 @@ defineProps({
 
 .articleCard__time__materialIcon {
   font-size: 12px;
-  color: var(--text-black);
 }
 
 .articleCard:hover {
-  box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px,
-    rgba(0, 0, 0, 0.22) 0px 10px 10px;
+  box-shadow: 0px 0px 150px rgba(255, 255, 255, 1);
 }
 
 .articleCard__thumbnail {

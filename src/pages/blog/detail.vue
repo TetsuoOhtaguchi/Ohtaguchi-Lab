@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { useRoute } from 'vue-router'
 import { Article } from '@/types/NewtType'
 
 definePageMeta({

@@ -21,7 +21,7 @@ const emit = defineEmits<{
 
 const audioSrc = ref('')
 const sound = ref<Howl | null>(null)
-const playingFlug = ref(false)
+const playingFlag = ref(false)
 
 onMounted(async () => {
   try {
@@ -50,7 +50,7 @@ const playAudio = () => {
   // 再生ステータスがfalseの場合、曲を再生する
   if (!sound.value.playing()) {
     sound.value.play()
-    playingFlug.value = true
+    playingFlag.value = true
     emit('playAudio')
   }
 }
@@ -61,7 +61,7 @@ const stopAudio = () => {
   // 再生ステータスがtrueの場合、曲を停止する
   if (sound.value.playing()) {
     sound.value.stop()
-    playingFlug.value = false
+    playingFlag.value = false
   }
 }
 
@@ -85,7 +85,7 @@ watch(
 <template>
   <div class="audioPlayer">
     <transition name="ripple">
-      <div v-show="playingFlug">
+      <div v-show="playingFlag">
         <div class="positionAbsoluteCenter audioPlayer__ripple" />
         <div
           class="positionAbsoluteCenter audioPlayer__ripple audioPlayer__ripple--delay1"
@@ -101,7 +101,7 @@ watch(
 
     <button class="positionAbsoluteCenter buttonStyleReset audioPlayer__button">
       <div
-        v-show="!playingFlug"
+        v-show="!playingFlag"
         class="audioPlayer__button__iconContainer"
         @click="playAudio"
       >
@@ -126,7 +126,7 @@ watch(
         />
       </div>
       <div
-        v-show="playingFlug"
+        v-show="playingFlag"
         class="audioPlayer__button__iconContainer"
         @click="stopAudio"
       >

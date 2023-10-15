@@ -37,4 +37,5 @@ export type Article = Content & {
   postExcerpt: string
   body: string
   slug: string
+  tag: number
 }

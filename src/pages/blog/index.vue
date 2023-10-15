@@ -5,13 +5,37 @@ definePageMeta({
   layout: 'blog-layout'
 })
 
+onMounted(() => {
+  setTimeout(() => {
+    window.scrollTo({
+      top: 0
+    })
+  }, 0)
+})
+
+const route = useRoute()
+
+const pageNumber = ref<number>()
+if (!route.query.page) {
+  pageNumber.value = 1
+} else {
+  pageNumber.value = Number(route.query.page)
+}
+
+const skipValue = ref<number>((pageNumber.value - 1) * 10)
+
 const { data } = await useAsyncData(async () => {
   const runtimeConfig = useRuntimeConfig()
   const { $newtClient } = useNuxtApp()
 
   const res = await $newtClient.getContents<Article>({
     appUid: runtimeConfig.public.NUXT_NEWT_APP_UID,
-    modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID
+    modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
+    query: {
+      skip: skipValue.value,
+      limit: 10,
+      tag: route.query.tag
+    }
   })
 
   return res.items.map((item: Article) => {
@@ -22,52 +46,52 @@ const { data } = await useAsyncData(async () => {
       thumbnail: item.thumbnail,
       postExcerpt: item.postExcerpt,
       body: item.body,
-      slug: item.slug
+      slug: item.slug,
+      tag: item.tag
     }
   })
 })
-
-const route = useRoute()
-const blogLength = ref<number>(0)
-const currentNumber = ref<number>(Number(route.query.page) || 1)
-
-if (data.value) {
-  blogLength.value = data.value?.length
-}
-
-const articleArray = computed(() => {
-  return data.value?.filter(
-    (article, index) =>
-      index + 1 >= currentNumber.value * 10 - 9 &&
-      index + 1 <= currentNumber.value * 10
-  )
-})
-
-const pageSelectHandler = (current: number) => {
-  currentNumber.value = current
-}
 </script>
 
 <template>
-  <div class="articleCard__container">
-    <ArticleCard v-for="item in articleArray" :key="item._id" :article="item" />
-  </div>
+  <div class="blogIndex">
+    <div>
+      <ul class="articleCard__ul">
+        <li v-for="item in data" :key="item._id">
+          <ArticleCard :article="item" />
+        </li>
+      </ul>
 
-  <div class="pagination__container">
-    <Pagination :blogLength="blogLength" @currentNumber="pageSelectHandler" />
+      <div class="pagination__container">
+        <Pagination :articles="data?.length" />
+      </div>
+    </div>
+
+    <Sidebar />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.articleCard__container {
+.blogIndex {
+  display: flex;
+  justify-content: center;
+  padding: 96px 16px 64px;
+  gap: 40px;
+  @media screen and (max-width: 1117px) {
+    flex-direction: column;
+    align-items: center;
+    gap: 64px;
+  }
+}
+
+.articleCard__ul {
   display: flex;
   flex-direction: column;
   gap: 64px;
-  align-items: center;
-  padding: 96px 16px;
 }
 
 .pagination__container {
+  margin-top: 32px;
   display: flex;
   justify-content: center;
 }

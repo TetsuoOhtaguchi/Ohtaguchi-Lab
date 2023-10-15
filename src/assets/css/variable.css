@@ -6,6 +6,7 @@
   --text-black: #000000;
   --text-white: #ffffff;
   --text-articleWhite: #e6e6e6;
+  --text-hoverBlack: #aaaaaa;
 
   --bg-black: #000000;
   --bg-cardBlack: #393939;
@@ -45,4 +46,6 @@
   padding: 0;
   border: none;
   background: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  cursor: pointer;
 }

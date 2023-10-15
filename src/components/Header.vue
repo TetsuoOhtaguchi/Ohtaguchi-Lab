@@ -4,7 +4,7 @@ defineProps({
    * 表示フラグ
    * @example 'true' | 'false'
    */
-  showFlug: { type: Boolean, required: true },
+  showFlag: { type: Boolean, required: true },
   /**
    * デザイン変更
    * @example 'index' | 'blog'
@@ -20,13 +20,13 @@ const emit = defineEmits<{
 
 <template>
   <header
-    v-show="showFlug"
+    v-show="showFlag"
     class="header"
     :class="{ flexBox__justify__content: designChange === 'index' }"
   >
     <nav v-show="designChange === 'index'">
       <ul class="header__unorderedList">
-        <li class="header__listItem" :class="{ showAbout: showFlug }">
+        <li class="header__listItem" :class="{ showAbout: showFlag }">
           <button
             class="buttonStyleReset header__listItem__item"
             @click="emit('clickAbout')"
@@ -34,14 +34,14 @@ const emit = defineEmits<{
             ABOUT
           </button>
         </li>
-        <li class="header__listItem" :class="{ showBlog: showFlug }">
+        <li class="header__listItem" :class="{ showBlog: showFlag }">
           <NuxtLink class="nuxtLink" to="/blog" target="_blank">
             <button class="buttonStyleReset header__listItem__item">
               BLOG
             </button>
           </NuxtLink>
         </li>
-        <li class="header__listItem" :class="{ showContact: showFlug }">
+        <li class="header__listItem" :class="{ showContact: showFlag }">
           <button
             class="buttonStyleReset header__listItem__item"
             @click="emit('clickContact')"

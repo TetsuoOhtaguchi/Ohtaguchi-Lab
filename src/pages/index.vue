@@ -2,7 +2,7 @@
 const firstPlayback = ref(false)
 const color = ref<'black' | 'white'>('black')
 const colorChangeState = ref(false)
-const headerShowFlug = ref(false)
+const headerShowFlag = ref(false)
 const modalShowState = ref(false)
 const modalContentsItem = ref<'about' | 'contact' | ''>('')
 
@@ -14,7 +14,7 @@ const playAudio = () => {
   if (color.value === 'black') {
     setTimeout(() => {
       color.value = 'white'
-      headerShowFlug.value = true
+      headerShowFlag.value = true
     }, 2600)
     setTimeout(() => {
       colorChangeState.value = true
@@ -39,7 +39,7 @@ const modalCloseHandler = (val: boolean) => {
 
 <template>
   <Header
-    :showFlug="headerShowFlug"
+    :showFlag="headerShowFlag"
     @clickAbout="aboutClickHandler"
     @clickContact="contactClickHandler"
   />

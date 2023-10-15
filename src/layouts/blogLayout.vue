@@ -1,6 +1,7 @@
 <template>
   <div>
-    <Header :showFlug="true" designChange="blog" />
+    <Header :showFlag="true" designChange="blog" />
+    <ScrollTopButton />
     <slot />
   </div>
 </template>

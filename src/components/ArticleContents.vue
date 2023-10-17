@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { Article } from '@/types/NewtType'
 
-const props = defineProps({
+defineProps({
   /**
    * 記事情報
    * @example {
@@ -41,14 +41,12 @@ const props = defineProps({
     required: true
   }
 })
-
-// console.log(props.article?.body)
 </script>
 
 <template>
-  <article class="articleContents boxShadow">
+  <article class="articleContents">
     <div class="articleContents__articleHeader">
-      <h1 class="articleContents__articleHeader__topicTitle">
+      <h1 class="articleContents__articleHeader__h1">
         {{ article?.topicTitle }}
       </h1>
 
@@ -88,7 +86,7 @@ const props = defineProps({
       />
     </div>
 
-    <div v-html="article?.body" class="articleContents__body" />
+    <div v-html="$sanitize(article?.body)" class="articleContents__body" />
   </article>
 </template>
 
@@ -99,6 +97,7 @@ const props = defineProps({
   overflow-wrap: break-word;
   text-align: justify;
   text-justify: inter-ideograph;
+  background-color: var(--bg-cardBlack);
 }
 
 .articleContents__articleHeader {
@@ -108,9 +107,10 @@ const props = defineProps({
   }
 }
 
-.articleContents__articleHeader__topicTitle {
+.articleContents__articleHeader__h1 {
   font-size: 28px;
   line-height: 1.6;
+  color: var(--text-articleWhite);
   @media screen and (max-width: 700px) {
     font-size: 20px;
   }
@@ -120,6 +120,7 @@ const props = defineProps({
   display: flex;
   gap: 32px;
   margin: 64px 0 32px;
+  color: var(--text-articleWhite);
   @media screen and (max-width: 700px) {
     gap: 16px;
     margin: 32px 0 16px;
@@ -128,7 +129,6 @@ const props = defineProps({
 
 .articleContents__articleHeader__time {
   font-size: 12px;
-  color: var(--text-black);
   display: flex;
   align-items: center;
   gap: 8px;
@@ -137,7 +137,6 @@ const props = defineProps({
 
 .articleContents__articleHeader__materialIcon {
   font-size: 12px;
-  color: var(--text-black);
 }
 
 .articleContents__articleHeader__thumbnail {

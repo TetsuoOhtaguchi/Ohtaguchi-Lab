@@ -6,6 +6,7 @@ definePageMeta({
 })
 
 const route = useRoute()
+const router = useRouter()
 
 const { data } = await useAsyncData(async () => {
   const runtimeConfig = useRuntimeConfig()
@@ -22,17 +23,38 @@ const { data } = await useAsyncData(async () => {
 </script>
 
 <template>
-  <div class="articleVue">
+  <div class="articleContentsWrapper">
     <ArticleContents v-if="data" :article="data" />
-    <div v-else>読み込み中です...</div>
+    <div v-else class="loading__text">読み込み中です...</div>
+    <button class="buttonStyleReset backButton" @click="() => router.back()">
+      <i class="material-icons-outlined">keyboard_double_arrow_left</i>
+      BACK
+    </button>
   </div>
 </template>
 
 <style lang="scss" scoped>
-.articleVue {
+.articleContentsWrapper {
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 100px 16px;
+}
+
+.loading__text {
+  color: var(--text-white);
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-white);
+  transition: 0.3s;
+  margin-top: 32px;
+  font-size: 16px;
+}
+
+.backButton:hover {
+  color: var(--text-hoverBlack);
 }
 </style>

@@ -54,36 +54,20 @@ const { data } = await useAsyncData(async () => {
 </script>
 
 <template>
-  <div class="blogIndex">
-    <div>
-      <ul class="articleCard__ul">
-        <li v-for="item in data" :key="item._id">
-          <ArticleCard :article="item" />
-        </li>
-      </ul>
+  <div>
+    <ul class="articleCard__ul">
+      <li v-for="item in data" :key="item._id">
+        <ArticleCard :article="item" />
+      </li>
+    </ul>
 
-      <div class="pagination__container">
-        <Pagination :articles="data?.length" />
-      </div>
+    <div class="pagination__container">
+      <Pagination :articles="data?.length" />
     </div>
-
-    <Sidebar />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.blogIndex {
-  display: flex;
-  justify-content: center;
-  padding: 96px 16px 64px;
-  gap: 40px;
-  @media screen and (max-width: 1117px) {
-    flex-direction: column;
-    align-items: center;
-    gap: 64px;
-  }
-}
-
 .articleCard__ul {
   display: flex;
   flex-direction: column;

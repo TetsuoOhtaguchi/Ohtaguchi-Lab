@@ -96,6 +96,10 @@ const closeClickHandler = () => {
 
 .modal__slot {
   transition: 0.3s;
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  padding: 0 16px;
 }
 
 .showItem-enter-avtive,

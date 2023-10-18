@@ -33,12 +33,14 @@ const emit = defineEmits<{
           >
             ABOUT
           </button>
+          <div class="header__listItem__underbar" />
         </li>
         <li class="header__listItem" :class="{ showBlog: showFlag }">
           <NuxtLink class="nuxtLink" to="/blog" target="_blank">
             <button class="buttonStyleReset header__listItem__item">
               BLOG
             </button>
+            <div class="header__listItem__underbar" />
           </NuxtLink>
         </li>
         <li class="header__listItem" :class="{ showContact: showFlag }">
@@ -48,17 +50,20 @@ const emit = defineEmits<{
           >
             CONTACT
           </button>
+          <div class="header__listItem__underbar" />
         </li>
       </ul>
     </nav>
 
-    <NuxtLink
-      v-show="designChange === 'blog'"
-      class="nuxtLink header__logo__wrapper"
-      to="/"
-    >
-      <Logo size="small" color="white" />
-    </NuxtLink>
+    <h1 v-show="designChange === 'blog'">
+      <NuxtLink class="nuxtLink header__logo__wrapper" to="/">
+        <Logo
+          size="small"
+          color="white"
+          alt="フリーランスWeb Ohtaguchi Lab ブログ"
+        />
+      </NuxtLink>
+    </h1>
   </header>
 </template>
 
@@ -93,6 +98,17 @@ const emit = defineEmits<{
   @media screen and (max-width: 700px) {
     font-size: 14px;
   }
+}
+
+.header__listItem__underbar {
+  height: 1px;
+  width: 0%;
+  transition: 0.6s;
+}
+
+.header__listItem:hover .header__listItem__underbar {
+  background-color: var(--bg-white);
+  width: 100%;
 }
 
 .showAbout {

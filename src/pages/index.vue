@@ -57,7 +57,15 @@ const modalCloseHandler = (val: boolean) => {
       class="positionAbsoluteCenter logo__wrapper"
       :class="{ logo__showLogoAnimation__style: firstPlayback }"
     >
-      <Logo size="large" :color="color" />
+      <h1>
+        <a tabindex="-1">
+          <Logo
+            size="large"
+            :color="color"
+            alt="フリーランスWeb Ohtaguchi Lab"
+          />
+        </a>
+      </h1>
     </div>
 
     <div class="positionAbsoluteCenter audioPlayer__wrapper">

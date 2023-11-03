@@ -6,6 +6,16 @@ const headerShowFlag = ref(false)
 const modalShowState = ref(false)
 const modalContentsItem = ref<'about' | 'contact' | ''>('')
 
+function disableScroll(e: Event) {
+  e.preventDefault()
+}
+
+// スクロールさせない設定
+onMounted(() => {
+  document.addEventListener('touchmove', disableScroll, { passive: false })
+  document.addEventListener('mousewheel', disableScroll, { passive: false })
+})
+
 const playAudio = () => {
   if (firstPlayback.value) return
 
@@ -30,10 +40,18 @@ const aboutClickHandler = () => {
 const contactClickHandler = () => {
   modalShowState.value = true
   modalContentsItem.value = 'contact'
+
+  // コンタクトのみスクロール非活性を解除
+  document.removeEventListener('touchmove', disableScroll)
+  document.removeEventListener('mousewheel', disableScroll)
 }
 
 const modalCloseHandler = (val: boolean) => {
   modalShowState.value = val
+  modalContentsItem.value = ''
+
+  document.addEventListener('touchmove', disableScroll, { passive: false })
+  document.addEventListener('mousewheel', disableScroll, { passive: false })
 }
 </script>
 
@@ -110,13 +128,14 @@ const modalCloseHandler = (val: boolean) => {
     <Modal
       class="modal"
       v-model="modalShowState"
+      :modalContentsItem="modalContentsItem"
       @clickClose="modalCloseHandler"
     >
       <div v-show="modalContentsItem === 'about'">
         <ModalAbout />
       </div>
       <div v-show="modalContentsItem === 'contact'">
-        <ModalContact />
+        <ModalContact :modalShowState="modalShowState" />
       </div>
     </Modal>
   </div>

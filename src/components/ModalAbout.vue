@@ -1,5 +1,5 @@
 <template>
-  <h3 class="modalAbout__h3">About</h3>
+  <h3 class="modal__title">About</h3>
   <div class="modalAbout__itemContainer">
     <img
       src="@/assets/images/pngs/noimage.png"
@@ -18,13 +18,12 @@
 </template>
 
 <style lang="scss" scoped>
-.modalAbout__h3 {
+.modal__title {
   position: absolute;
   top: 16px;
   left: 16px;
   font-size: 18px;
   font-weight: 600;
-  margin-bottom: 16px;
 }
 
 .modalAbout__itemContainer {

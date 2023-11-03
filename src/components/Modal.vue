@@ -1,10 +1,20 @@
 <script setup lang="ts">
+import { PropType } from 'nuxt/dist/app/compat/capi'
+
 const props = defineProps({
   /**
    * 表示フラグ
    * @example true: 表示 | false: 非表示
    */
-  modelValue: { type: Boolean, required: true }
+  modelValue: { type: Boolean, required: true },
+  /**
+   * モーダルコンテンツ
+   * @example 'about' | 'contact'
+   */
+  modalContentsItem: {
+    type: String as PropType<'about' | 'contact' | ''>,
+    default: ''
+  }
 })
 
 const emit = defineEmits<{
@@ -97,7 +107,7 @@ const closeClickHandler = () => {
 .modal__slot {
   transition: 0.3s;
   display: grid;
-  place-items: center;
+  place-content: center;
   height: 100vh;
   padding: 0 16px;
 }

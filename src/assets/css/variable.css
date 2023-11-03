@@ -5,12 +5,15 @@
   --text-white: #ffffff;
   --text-articleWhite: #e6e6e6;
   --text-hoverBlack: #aaaaaa;
+  --text-error: #e30000;
 
   --bg-black: #000000;
+  --bg-blackRgb: rgb(0, 0, 0, 0.5);
   --bg-cardBlack: #393939;
   --bg-hoverBlack: #636363;
   --bg-preBlack: #272822;
   --bg-white: #ffffff;
+  --bg-error: #ff9494;
 }
 
 .nuxtLink {

@@ -60,7 +60,7 @@ defineProps({
           >
             edit
           </i>
-          {{ formatDate(article?._sys.raw.firstPublishedAt) }}
+          {{ useFormatData(article?._sys.raw.firstPublishedAt) }}
         </time>
         <time
           :datetime="article?._sys.updatedAt"
@@ -71,7 +71,7 @@ defineProps({
           >
             update
           </i>
-          {{ formatDate(article?._sys.updatedAt) }}
+          {{ useFormatData(article?._sys.updatedAt) }}
         </time>
       </div>
 

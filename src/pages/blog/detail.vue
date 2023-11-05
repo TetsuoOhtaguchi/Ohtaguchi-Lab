@@ -20,12 +20,52 @@ const { data } = await useAsyncData(async () => {
 
   return res
 })
+
+const postExcerpt = data.value?.postExcerpt || ''
+const strippedExcerpt = postExcerpt.replace(/(<([^>]+)>)/gi, '')
+
+useHead({
+  title: data.value?.topicTitle,
+  meta: [
+    {
+      name: 'description',
+      content: strippedExcerpt
+    },
+    {
+      property: 'og:title',
+      content: data.value?.topicTitle
+    },
+    {
+      property: 'og:description',
+      content: strippedExcerpt
+    },
+    {
+      property: 'og:type',
+      content: 'article'
+    },
+    {
+      property: 'og:image',
+      content: data.value?.thumbnail.src
+    },
+    {
+      property: 'og:url',
+      content: 'https://ohtaguchi-lab.com' + route.fullPath
+    },
+    {
+      property: 'og:site_name',
+      content: 'Ohtaguchi Lab Blog'
+    }
+  ]
+})
 </script>
 
 <template>
   <div class="articleContentsWrapper">
     <ArticleContents v-if="data" :article="data" />
-    <div v-else class="loading__text">読み込み中です...</div>
+    <div v-else class="article__space">
+      <span>Loading...</span>
+    </div>
+
     <button class="buttonStyleReset backButton" @click="() => router.back()">
       <i class="material-icons-outlined">keyboard_double_arrow_left</i>
       BACK
@@ -40,8 +80,14 @@ const { data } = await useAsyncData(async () => {
   align-items: center;
 }
 
-.loading__text {
+.article__space {
+  width: 870px;
+  text-align: center;
+  font-size: 24px;
   color: var(--text-white);
+  @media screen and (max-width: 870px) {
+    width: calc(100vw - 32px);
+  }
 }
 
 .backButton {

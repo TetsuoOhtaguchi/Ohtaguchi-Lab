@@ -92,12 +92,14 @@ defineProps({
 
 <style lang="scss">
 .articleContents {
-  max-width: 870px;
-  width: 100%;
+  width: 870px;
   overflow-wrap: break-word;
   text-align: justify;
   text-justify: inter-ideograph;
   background-color: var(--bg-cardBlack);
+  @media screen and (max-width: 902px) {
+    width: calc(100vw - 32px);
+  }
 }
 
 .articleContents__articleHeader {

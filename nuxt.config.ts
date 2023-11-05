@@ -6,7 +6,45 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'ja'
       },
-      meta: [{ charset: 'utf-8' }],
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        {
+          name: 'description',
+          content:
+            'Tetsuo Ohtaguchi | フリーランスエンジニアとして、テクノロジーの世界に挑戦中。Vue.js、Nuxt.jsを駆使し、魅力的なWeb体験の提供を目指す。'
+        },
+        {
+          property: 'og:title',
+          content: 'Ohtaguchi Lab'
+        },
+        {
+          property: 'og:description',
+          content:
+            'フリーランスエンジニアとして、テクノロジーの世界に挑戦中。Vue.js、Nuxt.jsを駆使し、魅力的なWeb体験の提供を目指す。'
+        },
+        {
+          property: 'og:type',
+          content: 'website'
+        },
+        {
+          property: 'og:url',
+          content: 'https://ohtaguchi-lab.com/'
+        },
+        {
+          property: 'og:image',
+          content:
+            'https://ohtaguchi-lab.com/assets/images/pngs/ohtaguchi_lab_icatch.png'
+        },
+        {
+          property: 'og:site_name',
+          content: 'Ohtaguchi Lab'
+        },
+        {
+          property: 'og:locale',
+          content: 'ja_JP'
+        }
+      ],
       link: [
         {
           rel: 'stylesheet',

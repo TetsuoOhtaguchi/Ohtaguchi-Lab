@@ -24,15 +24,16 @@ const route = useRoute()
       <NuxtLink
         :to="{
           path: '/blog',
-          query: { page: 1, tag: 1 }
+          query: { page: 1, tag: 'freelance' }
         }"
         class="nuxtLink sidebarCategories__categories__nuxtLink"
       >
-        HipHop
+        Freelance
         <div
           class="sidebarCategories__categories__underbar"
           :class="{
-            sidebarCategories__select__categorie: route.query.tag === '1'
+            sidebarCategories__select__categorie:
+              route.query.tag === 'freelance'
           }"
         />
       </NuxtLink>
@@ -41,15 +42,33 @@ const route = useRoute()
       <NuxtLink
         :to="{
           path: '/blog',
-          query: { page: 1, tag: 2 }
+          query: { page: 1, tag: 'programming' }
         }"
         class="nuxtLink sidebarCategories__categories__nuxtLink"
       >
-        Logo
+        Programming
         <div
           class="sidebarCategories__categories__underbar"
           :class="{
-            sidebarCategories__select__categorie: route.query.tag === '2'
+            sidebarCategories__select__categorie:
+              route.query.tag === 'programming'
+          }"
+        />
+      </NuxtLink>
+    </li>
+    <li class="sidebarCategories__categories__li">
+      <NuxtLink
+        :to="{
+          path: '/blog',
+          query: { page: 1, tag: 'work' }
+        }"
+        class="nuxtLink sidebarCategories__categories__nuxtLink"
+      >
+        Work
+        <div
+          class="sidebarCategories__categories__underbar"
+          :class="{
+            sidebarCategories__select__categorie: route.query.tag === 'work'
           }"
         />
       </NuxtLink>
@@ -72,11 +91,12 @@ const route = useRoute()
   @media screen and (max-width: 1117px) {
     flex-direction: row;
     flex-wrap: wrap;
+    gap: 16px;
   }
 }
 
 .sidebarCategories__categories__li {
-  width: 90px;
+  width: fit-content;
   overflow: hidden;
   line-height: 1rem;
 }

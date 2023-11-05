@@ -51,15 +51,47 @@ const { data } = await useAsyncData(async () => {
     }
   })
 })
+
+useHead({
+  title: 'Ohtaguchi Lab Blog',
+  meta: [
+    {
+      name: 'description',
+      content:
+        'プログラミングや学んだIT技術、開発に携わった案件、日常の出来事などを書き残すためのブログです。'
+    },
+    {
+      property: 'og:title',
+      content: 'Ohtaguchi Lab Blog'
+    },
+    {
+      property: 'og:description',
+      content:
+        'プログラミングや学んだIT技術、開発に携わった案件、日常の出来事などを書き残すためのブログです。'
+    },
+    {
+      property: 'og:url',
+      content: 'https://ohtaguchi-lab.com/blog'
+    },
+    {
+      property: 'og:site_name',
+      content: 'Ohtaguchi Lab Blog'
+    }
+  ]
+})
 </script>
 
 <template>
   <div>
-    <ul class="articleCard__ul">
+    <ul v-if="data?.length !== 0 && data !== null" class="articleCard__ul">
       <li v-for="item in data" :key="item._id">
         <ArticleCard :article="item" />
       </li>
     </ul>
+
+    <div v-else class="article__space">
+      <span>In preparation. 🙏</span>
+    </div>
 
     <div class="pagination__container">
       <Pagination :articles="data?.length" />
@@ -72,6 +104,16 @@ const { data } = await useAsyncData(async () => {
   display: flex;
   flex-direction: column;
   gap: 64px;
+}
+
+.article__space {
+  width: 870px;
+  text-align: center;
+  font-size: 24px;
+  color: var(--text-white);
+  @media screen and (max-width: 870px) {
+    width: calc(100vw - 32px);
+  }
 }
 
 .pagination__container {

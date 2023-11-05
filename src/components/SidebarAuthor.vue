@@ -7,7 +7,7 @@
       class="sidebarAuthor__authorImage"
     />
     <p class="sidebarAuthor__authorText">
-      太田口鉄夫 | Ohtaguchi Tetsuo
+      太田口鉄夫 | Tetsuo Ohtaguchi
       <br />
       <br />
       フリーランスエンジニアとして、テクノロジーの世界に挑戦中。Vue.js、Nuxt.jsを駆使し、魅力的なWeb体験の提供を目指す。デジタル作品において、デザインと技術を融合し、卓越した品質を追求する。<br />

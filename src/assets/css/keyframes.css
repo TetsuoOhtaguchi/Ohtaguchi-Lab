@@ -1,0 +1,86 @@
+/* pages/index.vue */
+@keyframes firstViewMaskColorChangeAnimation {
+  100% {
+    background-color: var(--bg-black);
+  }
+}
+
+@keyframes hideAnimation {
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes showAnimation {
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes upAndDownAnimation {
+  0% {
+    height: calc(100vh);
+  }
+  50% {
+    height: calc(100vh - 32px);
+  }
+  100% {
+    height: calc(100vh);
+  }
+}
+
+@keyframes moveBottomAnimation {
+  0% {
+    height: calc(100vh);
+  }
+  100% {
+    height: calc(100vh * 2 - 288px);
+  }
+}
+
+/* components/AudioPlayer.vue */
+@keyframes ripplesAnimation {
+  0% {
+    opacity: 0;
+  }
+
+  4% {
+    opacity: 1;
+  }
+
+  100% {
+    width: 140px;
+    height: 140px;
+    opacity: 0;
+  }
+}
+
+@keyframes modalAddHeightAnimation {
+  0% {
+    height: 0px;
+  }
+  33% {
+    height: calc(100vh / 3);
+  }
+  66% {
+    height: calc(calc(100vh / 3) * 2);
+  }
+  100% {
+    height: 100vh;
+  }
+}
+
+@keyframes drawLineAnimation {
+  0% {
+    width: 0px;
+  }
+  33% {
+    width: 100vw;
+  }
+  66% {
+    width: 100vw;
+  }
+  100% {
+    width: 0px;
+  }
+}

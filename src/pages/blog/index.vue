@@ -24,33 +24,28 @@ if (!route.query.page) {
 
 const skipValue = ref<number>((pageNumber.value - 1) * 10)
 
-const { data } = await useAsyncData(async () => {
-  const runtimeConfig = useRuntimeConfig()
-  const { $newtClient } = useNuxtApp()
+const articles = ref<Article[]>()
 
-  const res = await $newtClient.getContents<Article>({
-    appUid: runtimeConfig.public.NUXT_NEWT_APP_UID,
-    modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
-    query: {
-      skip: skipValue.value,
-      limit: 10,
-      tag: route.query.tag
-    }
+const getBlogList = async () => {
+  const { data } = await useAsyncData(() => {
+    const query =
+      '/api/getBlogList?page=' + skipValue.value + '&tag=' + route.query.tag
+    return $fetch(query)
   })
 
-  return res.items.map((item: Article) => {
-    return {
-      _id: item._id,
-      _sys: item._sys,
-      topicTitle: item.topicTitle,
-      thumbnail: item.thumbnail,
-      postExcerpt: item.postExcerpt,
-      body: item.body,
-      slug: item.slug,
-      tag: item.tag
-    }
-  })
-})
+  articles.value = data.value as Article[]
+}
+
+await getBlogList()
+
+// クエリの変更を監視する
+watch(
+  () => route.query,
+  async () => {
+    // クエリが変更されるたびに、ブログ情報を取得する
+    await getBlogList()
+  }
+)
 
 useHead({
   title: 'Ohtaguchi Lab Blog',
@@ -83,8 +78,11 @@ useHead({
 
 <template>
   <div>
-    <ul v-if="data?.length !== 0 && data !== null" class="articleCard__ul">
-      <li v-for="item in data" :key="item._id">
+    <ul
+      v-if="articles?.length !== 0 && articles !== null"
+      class="articleCard__ul"
+    >
+      <li v-for="item in articles" :key="item._id">
         <ArticleCard :article="item" />
       </li>
     </ul>
@@ -94,7 +92,7 @@ useHead({
     </div>
 
     <div class="pagination__container">
-      <Pagination :articles="data?.length" />
+      <Pagination :articles="articles?.length" />
     </div>
   </div>
 </template>

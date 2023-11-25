@@ -8,24 +8,24 @@ definePageMeta({
 const route = useRoute()
 const router = useRouter()
 
-const { data } = await useAsyncData(async () => {
-  const runtimeConfig = useRuntimeConfig()
-  const { $newtClient } = useNuxtApp()
+const article = ref<Article>()
 
-  const res = await $newtClient.getContent<Article>({
-    appUid: runtimeConfig.public.NUXT_NEWT_APP_UID,
-    modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
-    contentId: route.query.id as string
+const getBlogDetail = async () => {
+  const { data } = await useAsyncData(() => {
+    const query = '/api/getBlogDetail?id=' + route.query.id
+    return $fetch(query)
   })
 
-  return res
-})
+  article.value = data.value as Article
+}
 
-const postExcerpt = data.value?.postExcerpt || ''
+await getBlogDetail()
+
+const postExcerpt = article.value?.postExcerpt || ''
 const strippedExcerpt = postExcerpt.replace(/(<([^>]+)>)/gi, '')
 
 useHead({
-  title: data.value?.topicTitle,
+  title: article.value?.topicTitle,
   meta: [
     {
       name: 'description',
@@ -33,7 +33,7 @@ useHead({
     },
     {
       property: 'og:title',
-      content: data.value?.topicTitle
+      content: article.value?.topicTitle
     },
     {
       property: 'og:description',
@@ -45,7 +45,7 @@ useHead({
     },
     {
       property: 'og:image',
-      content: data.value?.thumbnail.src
+      content: article.value?.thumbnail.src
     },
     {
       property: 'og:url',
@@ -61,7 +61,7 @@ useHead({
 
 <template>
   <div class="articleContentsWrapper">
-    <ArticleContents v-if="data" :article="data" />
+    <ArticleContents v-if="article" :article="article" />
     <div v-else class="article__space">
       <span>Loading...</span>
     </div>

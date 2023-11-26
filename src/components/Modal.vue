@@ -30,8 +30,9 @@ const model = computed({
 })
 
 const showState = ref(false)
-
+const modalContentsItem = ref<'about' | 'contact' | ''>('')
 watch(model, () => {
+  modalContentsItem.value = props.modalContentsItem
   if (!model.value) {
     showState.value = false
   }
@@ -55,7 +56,14 @@ const closeClickHandler = () => {
   <div v-show="model" class="modal">
     <div class="modal__slotWrapper">
       <transition name="showItem">
-        <div v-show="showState" class="modal__slot">
+        <div
+          v-show="showState"
+          class="modal__slot"
+          :class="{
+            modal__slot__about: modalContentsItem === 'about',
+            modal__slot__contact: modalContentsItem === 'contact'
+          }"
+        >
           <slot />
         </div>
       </transition>
@@ -106,10 +114,19 @@ const closeClickHandler = () => {
 
 .modal__slot {
   transition: 0.3s;
+  padding: 0 16px;
+}
+
+.modal__slot__about {
   display: grid;
   place-content: center;
   height: 100vh;
-  padding: 0 16px;
+}
+
+.modal__slot__contact {
+  max-width: 500px;
+  margin: 55px auto 0 auto;
+  padding-bottom: 55px;
 }
 
 .showItem-enter-avtive,

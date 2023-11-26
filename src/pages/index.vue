@@ -190,7 +190,7 @@ const modalCloseHandler = (val: boolean) => {
   top: 56%;
   z-index: 3;
   color: var(--text-black);
-  font-size: 12px;
+  font-size: 14px;
   font-weight: bold;
 }
 

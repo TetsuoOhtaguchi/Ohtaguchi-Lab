@@ -19,13 +19,13 @@
 
 @keyframes upAndDownAnimation {
   0% {
-    height: calc(100vh);
+    height: 100vh;
   }
   50% {
     height: calc(100vh - 32px);
   }
   100% {
-    height: calc(100vh);
+    height: 100vh;
   }
 }
 

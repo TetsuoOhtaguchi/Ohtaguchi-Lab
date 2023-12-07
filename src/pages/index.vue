@@ -187,7 +187,7 @@ const modalCloseHandler = (val: boolean) => {
 
 .touchMe__text {
   left: 50%;
-  top: 56%;
+  top: calc(100vh / 2 + 48px);
   z-index: 3;
   color: var(--text-black);
   font-size: 14px;

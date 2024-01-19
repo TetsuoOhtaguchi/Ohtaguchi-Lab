@@ -14,7 +14,9 @@ export default defineNuxtPlugin(() => {
         'span',
         'ol',
         'ul',
-        'li'
+        'li',
+        'br',
+        'a'
       ],
       allowedAttributes: {
         a: ['href', 'name', 'target'],

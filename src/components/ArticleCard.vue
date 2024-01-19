@@ -74,7 +74,13 @@ defineProps({
               </i>
               {{ useFormatData(article._sys.raw.firstPublishedAt) }}
             </time>
-            <time :datetime="article._sys.updatedAt" class="articleCard__time">
+            <time
+              v-if="
+                article._sys.raw.firstPublishedAt !== article._sys.updatedAt
+              "
+              :datetime="article._sys.updatedAt"
+              class="articleCard__time"
+            >
               <i
                 class="material-icons-outlined articleCard__time__materialIcon"
               >

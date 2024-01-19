@@ -63,6 +63,7 @@ defineProps({
           {{ useFormatData(article?._sys.raw.firstPublishedAt) }}
         </time>
         <time
+          v-if="article?._sys.raw.firstPublishedAt !== article?._sys.updatedAt"
           :datetime="article?._sys.updatedAt"
           class="articleContents__articleHeader__time"
         >
@@ -97,15 +98,17 @@ defineProps({
   text-align: justify;
   text-justify: inter-ideograph;
   background-color: var(--bg-cardBlack);
+  padding-bottom: 64px;
   @media screen and (max-width: 902px) {
     width: calc(100vw - 32px);
+    padding-bottom: 32px;
   }
 }
 
 .articleContents__articleHeader {
-  padding: 32px 32px 0 32px;
+  padding: 64px 32px 0 32px;
   @media screen and (max-width: 700px) {
-    padding: 16px;
+    padding: 32px 16px 0 16px;
   }
 }
 

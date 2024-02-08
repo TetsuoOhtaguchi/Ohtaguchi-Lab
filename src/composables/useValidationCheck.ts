@@ -36,7 +36,23 @@ export const useValidationCheck = (val: string, field: Field) => {
   if (field === 'message' && !val) {
     return true
   }
+  if (field === 'message' && !containsJapanese(val)) {
+    return true
+  }
   if (field === 'message' && val) {
     return false
   }
+}
+
+// 日本語が10文字以上入力されているか判断する
+function containsJapanese (text: string) {
+  // 日本語文字列を含む正規表現パターン
+  const japanesePattern =
+    /[\u3040-\u309F\u30A0-\u30FF\u4E00-\u9FAF\uFF66-\uFF9F]/g
+  // テキスト中の日本語文字列を取得し、その数をカウント
+  const japaneseMatches = text.match(japanesePattern)
+  const japaneseCount = japaneseMatches ? japaneseMatches.length : 0
+
+  // 日本語文字列が5文字以上含まれているかどうかを判断
+  return japaneseCount >= 5
 }

@@ -82,8 +82,10 @@ const substitutionHandler = () => {
 
 <template>
   <h3 class="modal__title">Contact</h3>
-
-  <form method="post" action="https://ohtaguchi-lab.form.newt.so/v1/eAnOZYj0c">
+  <div class="in__preparation__message">
+    <span>In preparation. 🙏</span>
+  </div>
+  <!-- <form method="post" action="https://ohtaguchi-lab.form.newt.so/v1/eAnOZYj0c">
     <div class="inputform__container">
       <Inputform
         v-model="name"
@@ -109,7 +111,7 @@ const substitutionHandler = () => {
     <div class="sendButton__wrapper">
       <SendButton :disabled="disabled" @click="substitutionHandler" />
     </div>
-  </form>
+  </form> -->
 </template>
 
 <style lang="scss" scoped>
@@ -119,6 +121,11 @@ const substitutionHandler = () => {
   left: 16px;
   font-size: 18px;
   font-weight: 600;
+}
+
+.in__preparation__message {
+  font-size: 24px;
+  text-align: center;
 }
 
 .inputform__container {

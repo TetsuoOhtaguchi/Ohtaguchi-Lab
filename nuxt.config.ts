@@ -83,11 +83,9 @@ export default defineNuxtConfig({
     FIREBASE_STORAGE_BUCKET: process.env.FIREBASE_STORAGE_BUCKET,
     FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
-    public: {
-      NUXT_NEWT_SPACE_UID: process.env.NUXT_NEWT_SPACE_UID,
-      NUXT_NEWT_CDN_API_TOKEN: process.env.NUXT_NEWT_CDN_API_TOKEN,
-      NUXT_NEWT_APP_UID: process.env.NUXT_NEWT_APP_UID,
-      NUXT_NEWT_BLOG_MODEL_UID: process.env.NUXT_NEWT_BLOG_MODEL_UID
+    newt: {
+      spaceUid: '',
+      cdnApiToken: ''
     }
   }
 })

@@ -1,7 +1,6 @@
 import { createClient } from 'newt-client-js'
 import { Article } from '../../types/NewtType'
 import { defineEventHandler, getQuery } from 'h3'
-import { type } from 'os'
 
 export default defineEventHandler(async event => {
   // @ts-ignore

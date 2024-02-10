@@ -10,14 +10,14 @@ export default defineEventHandler(async event => {
   const queryId = query.id
 
   const newtClient = createClient({
-    spaceUid: runtimeConfig.public.NUXT_NEWT_SPACE_UID as string,
-    token: runtimeConfig.public.NUXT_NEWT_CDN_API_TOKEN as string,
+    spaceUid: runtimeConfig.newt.spaceUid,
+    token: runtimeConfig.newt.cdnApiToken,
     apiType: 'cdn'
   })
 
   const res = await newtClient.getContent<Article>({
-    appUid: runtimeConfig.public.NUXT_NEWT_APP_UID,
-    modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
+    appUid: 'appUidBlog',
+    modelUid: 'modelUidArticle',
     contentId: queryId as string
   })
 

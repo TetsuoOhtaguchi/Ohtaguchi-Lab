@@ -8,8 +8,8 @@ export default defineEventHandler(async event => {
   const runtimeConfig = useRuntimeConfig()
 
   const newtClient = createClient({
-    spaceUid: runtimeConfig.public.NUXT_NEWT_SPACE_UID as string,
-    token: runtimeConfig.public.NUXT_NEWT_CDN_API_TOKEN as string,
+    spaceUid: runtimeConfig.newt.spaceUid,
+    token: runtimeConfig.newt.cdnApiToken,
     apiType: 'cdn'
   })
 
@@ -20,8 +20,8 @@ export default defineEventHandler(async event => {
   if (queryTag === 'undefined') {
     // タグが選択されていない場合
     const res = await newtClient.getContents<Article>({
-      appUid: runtimeConfig.public.NUXT_NEWT_APP_UID,
-      modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
+      appUid: 'appUidBlog',
+      modelUid: 'modelUidArticle',
       query: {
         skip: queryPageSkipValue,
         limit: 10
@@ -43,8 +43,8 @@ export default defineEventHandler(async event => {
   } else {
     // タグが選択されている場合
     const res = await newtClient.getContents<Article>({
-      appUid: runtimeConfig.public.NUXT_NEWT_APP_UID,
-      modelUid: runtimeConfig.public.NUXT_NEWT_BLOG_MODEL_UID,
+      appUid: 'appUidBlog',
+      modelUid: 'modelUidArticle',
       query: {
         skip: queryPageSkipValue,
         limit: 10,

@@ -84,8 +84,8 @@ export default defineNuxtConfig({
     FIREBASE_MESSAGING_SENDER_ID: process.env.FIREBASE_MESSAGING_SENDER_ID,
     FIREBASE_APP_ID: process.env.FIREBASE_APP_ID,
     newt: {
-      spaceUid: '',
-      cdnApiToken: ''
+      spaceUid: process.env.NUXT_NEWT_SPACE_UID,
+      cdnApiToken: process.env.NUXT_NEWT_CDN_API_TOKEN
     }
   }
 })

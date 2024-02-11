@@ -76,7 +76,8 @@ defineProps({
             </time>
             <time
               v-if="
-                article._sys.raw.firstPublishedAt !== article._sys.updatedAt
+                useFormatData(article._sys.raw.firstPublishedAt) !==
+                useFormatData(article._sys.updatedAt)
               "
               :datetime="article._sys.updatedAt"
               class="articleCard__time"
@@ -127,8 +128,9 @@ defineProps({
 
 .articleCard__topicTitle__pc {
   width: 496px;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 600;
+  color: var(--main-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

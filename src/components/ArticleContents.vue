@@ -63,7 +63,10 @@ defineProps({
           {{ useFormatData(article?._sys.raw.firstPublishedAt) }}
         </time>
         <time
-          v-if="article?._sys.raw.firstPublishedAt !== article?._sys.updatedAt"
+          v-if="
+            useFormatData(article?._sys.raw.firstPublishedAt) !==
+            useFormatData(article?._sys.updatedAt)
+          "
           :datetime="article?._sys.updatedAt"
           class="articleContents__articleHeader__time"
         >
@@ -113,9 +116,10 @@ defineProps({
 }
 
 .articleContents__articleHeader__h1 {
-  font-size: 28px;
+  font-size: 26px;
   line-height: 1.6;
-  color: var(--text-articleWhite);
+  font-weight: 600;
+  color: var(--main-color);
   @media screen and (max-width: 700px) {
     font-size: 20px;
   }

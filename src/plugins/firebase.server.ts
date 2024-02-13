@@ -5,14 +5,13 @@ import { defineNuxtPlugin, useRuntimeConfig } from 'nuxt/app'
 
 export default defineNuxtPlugin(() => {
   const config = useRuntimeConfig()
-
   const firebaseConfig = {
-    apiKey: config.public.FIREBASE_API_KEY as string,
-    authDomain: config.public.FIREBASE_AUTH_DOMAIN as string,
-    projectId: config.public.FIREBASE_PROJECT_ID as string,
-    storageBucket: config.public.FIREBASE_STORAGE_BUCKET as string,
-    messagingSenderId: config.public.FIREBASE_MESSAGING_SENDER_ID as string,
-    appId: config.public.FIREBASE_APP_ID as string
+    apiKey: config.FIREBASE_API_KEY,
+    authDomain: config.FIREBASE_AUTH_DOMAIN,
+    projectId: config.FIREBASE_PROJECT_ID,
+    storageBucket: config.FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: config.FIREBASE_MESSAGING_SENDER_ID,
+    appId: config.FIREBASE_APP_ID
   }
 
   const app = initializeApp(firebaseConfig)

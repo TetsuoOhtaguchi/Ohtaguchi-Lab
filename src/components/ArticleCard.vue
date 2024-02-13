@@ -147,8 +147,9 @@ defineProps({
   @media screen and (max-width: 700px) {
     display: block;
     width: calc(100vw - 64px);
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
+    color: var(--main-color);
     overflow-wrap: break-word;
     line-height: 1.3;
   }

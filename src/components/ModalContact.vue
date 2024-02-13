@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { VueReCaptcha, useReCaptcha } from 'vue-recaptcha-v3'
+
 const props = defineProps({
   /**
    * モーダル表示ステート
@@ -68,24 +70,41 @@ watch(
   }
 )
 
-// 置換処理を行う
-const substitutionHandler = () => {
-  name.value = useZenkakuReplace(name.value)
-  mail.value = mail.value.trim()
-  subject.value = subject.value.trim()
-  if (!subject.value) {
-    subject.value = '未入力'
+const { vueApp } = useNuxtApp()
+vueApp.use(VueReCaptcha, {
+  siteKey: '6LfXwHApAAAAAMOtDUHaTzQSQG_XCTSVOpo_hT1J',
+  loaderOptions: {
+    autoHideBadge: true,
+    renderParameters: {
+      hl: 'ja'
+    }
   }
-  message.value = message.value.trim()
+})
+const recaptchaInstance = useReCaptcha()
+
+// 送信ボタンをクリックした際に、以下の処理を実行する
+const sendClick = async () => {
+  try {
+    // reCAPTCHAの初期化を待つ
+    await recaptchaInstance?.recaptchaLoaded()
+    // reCAPTCHAでトークンを取得する
+    const token = await recaptchaInstance?.executeRecaptcha('submit')
+    if (!token) return
+
+    // 整形処理を行う
+    name.value = useZenkakuReplace(name.value)
+    mail.value = mail.value.trim()
+    subject.value = subject.value.trim() || '未入力'
+    message.value = message.value.trim()
+  } catch (error) {
+    console.error('処理中にエラーが発生しました。', error)
+  }
 }
 </script>
 
 <template>
   <h3 class="modal__title">Contact</h3>
-  <div class="in__preparation__message">
-    <span>In preparation. 🙏</span>
-  </div>
-  <!-- <form method="post" action="https://ohtaguchi-lab.form.newt.so/v1/eAnOZYj0c">
+  <form method="post" action="https://ohtaguchi-lab.form.newt.so/v1/eAnOZYj0c">
     <div class="inputform__container">
       <Inputform
         v-model="name"
@@ -109,9 +128,9 @@ const substitutionHandler = () => {
     </div>
 
     <div class="sendButton__wrapper">
-      <SendButton :disabled="disabled" @click="substitutionHandler" />
+      <SendButton :disabled="disabled" @click="sendClick" />
     </div>
-  </form> -->
+  </form>
 </template>
 
 <style lang="scss" scoped>

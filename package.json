@@ -26,6 +26,7 @@
     "howler": "^2.2.3",
     "newt-client-js": "^3.2.6",
     "sanitize-html": "^2.11.0",
-    "sass": "^1.66.1"
+    "sass": "^1.66.1",
+    "vue-recaptcha-v3": "^2.0.1"
   }
 }
